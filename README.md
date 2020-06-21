@@ -25,7 +25,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 ## How to Navigate this Repo
 The repo consists of the following files:
 - `Tennis_final.ipynb` contains a jupyter notebook with all the codes to train and run the agents.
-- `Report.MD` contains description of the algorithm and hyper-parameters and performance of the algorithm.
+- `Report.md` contains description of the algorithm and hyper-parameters and performance of the algorithm.
 - `checkpoint_actor_0.pth`, `checkpoint_actor_1.pth` contains the weights of two trained agents' actor neural networks. `checkpoint_critic_0.pth`, `checkpoint_critic_1.pth`  contains the weights of two trained agents' critic neural networks.  See  `Tennis_final.ipynb` for example of how to load these weights.
 
 
