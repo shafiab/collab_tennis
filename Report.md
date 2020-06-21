@@ -13,7 +13,11 @@ The overall flow of the algorithm is reproduced here from the paper:
 [image_1]: alg_flow.png "MADDPG Algorithm"
 ![Trained Agents][image_1]
 
-## DDPG Implementation and Issues
+## MADDPG Implementation and Issues
+I faced a number of challenges while training this model:
+
+- I tried a number of different hyperparameter configurations (more on this in the next section). However, no matter the configurations, the average reward was always zero for the first 1000 episodes that I tried. Then once I increased $$\sigma$$ - which represents the variation or the size of the noise in the Ornstein-Uhlenbeck Noise Generation, I started observing positive rewards values.
+- However, even though I started observing positive reward after increasing  $$\sigma$$, the average reward was oscillating and ended up going down to zero over time. At this point, my intuition was even though large $$\sigma$$ that I am using is good for exploration at the beginning of the training and and resulting in positive rewards, in the middle of the training it would be better to increase exploitation more. So, I decided to add additional paramaeter $$\eps$$ to scale down the noise over time. After adding and playing with this parameter a bit, I started seeing improvement.
 
 ## Model Hyperparameters
 ### Actor Network
