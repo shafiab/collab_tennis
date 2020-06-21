@@ -13,6 +13,30 @@ The overall flow of the algorithm is reproduced here from the paper:
 [image_1]: alg_flow.png "MADDPG Algorithm"
 ![Trained Agents][image_1]
 
+## DDPG Implementation and Issues
+
+## Model Hyperparameters
+### Actor Network
+### Critic Network
+### Target actor and critic Networks
+- delayed copy of actor and critic network, with soft-update parameter tau set to 1e-3
+
+### Experience Replay
+- input buffer size of 1e6
+- sample/batch size of 512
+
+### Q value
+- discount factor gamma was set to 0.9
+
+### Ornstein-Uhlenbeck Noise Generation
+- code is the same from the udacity implementation
+-  mu=0, theta=0.15, sigma=0.1 was used (in the paper sigma=0.2)
+
+## Reward Plot and Convergence
+A reward vs episode plot is presented below. The model reached the target reward in 2154 episodes.
+
+[image_1]: reward_plt.png "Rewards vs. Episodes"
+![Trained Agents][image_1]
 
 ## Saved Model
 - Saved actor weights for the agents are [here](https://github.com/shafiab/collab_tennis/blob/master/checkpoint_actor_0.pth) and [here](https://github.com/shafiab/collab_tennis/blob/master/checkpoint_actor_1.pth)
@@ -23,4 +47,6 @@ The overall flow of the algorithm is reproduced here from the paper:
     agent.actor.load_state_dict(torch.load('checkpoint_actor_final.pth', map_location={'cuda:0': 'cpu'}))
     agent.critic.load_state_dict(torch.load('checkpoint_critic_final.pth', map_location={'cuda:0': 'cpu'}))
 ```
+## Future Work
+Few future ideas and improvement can be done here:
 
