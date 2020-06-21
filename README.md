@@ -27,3 +27,18 @@ The repo consists of the following files:
 - `Tennis_final.ipynb` contains a jupyter notebook with all the codes to train and run the agents.
 - `Report.MD` contains description of the algorithm and hyper-parameters and performance of the algorithm.
 - `checkpoint_actor_0.pth`, `checkpoint_actor_1.pth` contains the weights of two trained agents' actor neural networks. `checkpoint_critic_0.pth`, `checkpoint_critic_1.pth`  contains the weights of two trained agents' critic neural networks.  See  `Tennis_final.ipynb` for example of how to load these weights.
+
+
+## Setup / How to Run?
+
+I trained the agent using gpu in a workspace provided by Udacity. However, the workspace does not allow to see the simulator of the environment. So, once the agents are trained, I loaded the trained networks in a Jupyter Notebook in macbook and observed the behavior of the agents in a pre-built unity environment. The steps for the setup is as follows:
+
+- Follow the instruction in the [DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning#dependencies) to set up your Python environment. 
+- Once the setup is done, we can activate the environment and run notbook as follows:
+```
+source activate drlnd
+jupyter notebook
+```
+This will open a notebook session in the browser.
+- The pre-build unity environment `Tennis.app.zip` is also included in this repo.
+- So, we can just use the `Tennis_final.ipynb` notebook to train and run the agent. All codes are included in that notebook.
