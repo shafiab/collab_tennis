@@ -14,7 +14,8 @@ The overall flow of the algorithm is reproduced here from the paper:
 ![Trained Agents][image_1]
 
 ## MADDPG Implementation and Issues
-I faced a number of challenges while training this model:
+
+My implementation here is an extension of the DDPG algorithm with 2 agents. The DDPG algorithm part was adopted and modified from the udacity example implementaton [here](https://github.com/udacity/deep-reinforcement-learning/blob/master/ddpg-bipedal/ddpg_agent.py). This is pretty much the same implementation from my project 2 (more detail [here](https://github.com/shafiab/continuous_reacher/edit/master/Report.md)). I faced a number of challenges while training this model:
 
 - I tried a number of different hyperparameter configurations (more on this in the next section). However, no matter the configurations, the average reward was always zero for the first 1000 episodes that I tried. Then once I increased σ - which represents the variation or the size of the noise in the Ornstein-Uhlenbeck Noise Generation, I started observing positive rewards values.
 - However, even though I started observing positive reward after increasing  σ, the average reward was oscillating and ended up going down to zero over time. At this point, my intuition was even though large σ that I am using is good for exploration at the beginning of the training and and resulting in positive rewards, in the middle of the training it would be better to increase exploitation more. So, I decided to add additional paramaeter ε to scale down the noise over time. After adding and playing with this parameter a bit, I started seeing improvement.
@@ -77,5 +78,7 @@ A reward vs episode plot is presented below. The model reached the target reward
     agent.critic.load_state_dict(torch.load('checkpoint_critic_final.pth', map_location={'cuda:0': 'cpu'}))
 ```
 ## Future Work
-Few future ideas and improvement can be done here:
+Two future ideas come to mind:
+1. Initially, I tried to incorporate the states and actions of both agents as input to to critic network of the both agents. The idea was that by incorporating all the states and actions information available, the critic network will have a better estimate of Q value. However, this was without success. Further work and exploration is needed to figure out why my model wasn't converging here.
+2. I tried prioritized experience replay without success. More study from my part is needed to understand this, in particular this [paper](https://cardwing.github.io/files/RL_course_report.pdf) and implementation can be used.
 
