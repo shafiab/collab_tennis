@@ -35,8 +35,8 @@ The overall flow of the algorithm is reproduced here from the paper:
 ## Reward Plot and Convergence
 A reward vs episode plot is presented below. The model reached the target reward in 2154 episodes.
 
-[image_1]: reward_plt.png "Rewards vs. Episodes"
-![Trained Agents][image_1]
+[image_2]: reward_plt.png "Rewards vs. Episodes"
+![Trained Agents][image_2]
 
 ## Saved Model
 - Saved actor weights for the agents are [here](https://github.com/shafiab/collab_tennis/blob/master/checkpoint_actor_0.pth) and [here](https://github.com/shafiab/collab_tennis/blob/master/checkpoint_actor_1.pth)
