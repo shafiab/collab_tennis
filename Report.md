@@ -23,21 +23,43 @@ I faced a number of challenges while training this model:
 - I tried experimenting with prioritized experience replay without success. In the end, I ended up using a regular experience replay impementation with shared experience tuples from both agents without priority.
 
 ## Model Hyperparameters
+Each agent has the same configurations for actor and critic networks as follows:
 ### Actor Network
+- input = state_size
+- network = 256 x 128
+- output = action_size
+- batch normalization after the first layer
+- Adam optimizer with learning rate 1e-3
+- Weight initialization followed the process described in Section 7 of the DDPG paper
+- tanh activation in the output layer to limit the range of action. relu activation in other layers.
+
 ### Critic Network
+- first layer input = states
+- first layer size = state_size x 256
+- batch normalization after first layer
+- second layer input = action (this is similar to the orignal paper's suggestion)
+- second layer size = 256+action_size x 128
+- output layer = 128 x 1
+- Adam optimizer with learning rate 1e-3
+- Weight initialization followed the process described in Section 7 of the DDPG paper. However, unlike the paper the final layer was from a uniform distribution [−3 × 10−3, 3 × 10−3] 
+- relu activations in the intermediate layer.
+- Unlike the paper, I didn't use any weight decay.
+
 ### Target actor and critic Networks
 - delayed copy of actor and critic network, with soft-update parameter tau set to 1e-3
 
 ### Experience Replay
 - input buffer size of 1e6
-- sample/batch size of 512
+- sample/batch size of 256
 
 ### Q value
-- discount factor gamma was set to 0.9
+- discount factor gamma was set to 1.0
 
 ### Ornstein-Uhlenbeck Noise Generation
 - code is the same from the udacity implementation
--  mu=0, theta=0.15, sigma=0.1 was used (in the paper sigma=0.2)
+- mu=0, theta=0.15, sigma=0.5 was used
+- Noise was multiplied by ε to scale down the noise over time.
+- ε was initialized to 1.5, and decreased by 0.0001 after each learning step to a final value of 0.1.
 
 ## Reward Plot and Convergence
 A reward vs episode plot is presented below. The model reached the target reward in 2154 episodes.
